@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidDeveloping/TopPostsRedditViewer/app/src/main/res/layout/activity_main.xml" value="0.13489583333333333" />
         <entry key="..\:/AndroidDeveloping/TopPostsRedditViewer/app/src/main/res/layout/detailed_post_fragment.xml" value="0.2384428223844282" />
         <entry key="..\:/AndroidDeveloping/TopPostsRedditViewer/app/src/main/res/layout/top_post_adapter_item.xml" value="0.17074275362318841" />
         <entry key="..\:/AndroidDeveloping/TopPostsRedditViewer/app/src/main/res/layout/top_posts_list_fragment.xml" value="0.17074275362318841" />

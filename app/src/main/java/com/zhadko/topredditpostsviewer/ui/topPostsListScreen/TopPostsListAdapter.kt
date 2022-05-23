@@ -1,38 +1,75 @@
 package com.zhadko.topredditpostsviewer.ui.topPostsListScreen
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zhadko.topredditpostsviewer.databinding.TopPostAdapterItemBinding
-import com.zhadko.topredditpostsviewer.models.TopPost
+import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
 
 class TopPostsListAdapter(
-    private val onClick: (TopPost) -> Unit,
-    private val itemHasReached: () -> Unit
-) : ListAdapter<TopPost,
+    private val context: Context,
+    private val onClick: (TopPostDomainModel) -> Unit,
+) : ListAdapter<TopPostDomainModel,
         TopPostsListAdapter.TopPostViewHolder>(TopPostDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopPostViewHolder {
-        TODO("Not yet implemented")
+        return TopPostViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: TopPostViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(context, currentList[position], onClick)
     }
 
-    class TopPostViewHolder(binding: TopPostAdapterItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class TopPostViewHolder(
+        private val binding: TopPostAdapterItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-    }
-
-    class TopPostDiffUtilCallback: DiffUtil.ItemCallback<TopPost>() {
-        override fun areItemsTheSame(oldItem: TopPost, newItem: TopPost): Boolean {
-            TODO("Not yet implemented")
+        fun bind(
+            context: Context,
+            data: TopPostDomainModel,
+            click: (TopPostDomainModel) -> Unit
+        ) {
+            with(binding) {
+                authorFullName.text = data.author_fullname
+                timeOfAdding.text = data.created.toString()
+                numberComments.text = data.num_comments.toString()
+                Glide.with(context).load(data.thumbnail).into(thumbnail)
+                root.setOnClickListener {
+                    click(data)
+                }
+            }
         }
 
-        override fun areContentsTheSame(oldItem: TopPost, newItem: TopPost): Boolean {
-            TODO("Not yet implemented")
+        companion object {
+
+            fun from(parent: ViewGroup): TopPostViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = TopPostAdapterItemBinding.inflate(layoutInflater)
+                return TopPostViewHolder(binding)
+            }
+
+        }
+
+    }
+
+    class TopPostDiffUtilCallback : DiffUtil.ItemCallback<TopPostDomainModel>() {
+
+        override fun areItemsTheSame(
+            oldItem: TopPostDomainModel,
+            newItem: TopPostDomainModel
+        ): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: TopPostDomainModel,
+            newItem: TopPostDomainModel
+        ): Boolean {
+            return oldItem.id == newItem.id
         }
 
     }

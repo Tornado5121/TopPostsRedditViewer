@@ -12,8 +12,8 @@ fun Data.asTopPostDomainModel(): List<TopPostDomainModel> {
             id = it.data.id,
             author_fullname = it.data.author_fullname,
             created = it.data.created,
-            thumbnail = it.data.thumbnail,
-            num_comments = it.data.num_comments
+            thumbnail_link = it.data.thumbnail,
+            comments_number = it.data.num_comments
         )
     }
 }

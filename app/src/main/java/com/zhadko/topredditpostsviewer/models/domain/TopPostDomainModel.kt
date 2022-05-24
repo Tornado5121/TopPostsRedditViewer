@@ -1,9 +1,27 @@
 package com.zhadko.topredditpostsviewer.models.domain
 
+import com.zhadko.topredditpostsviewer.data.database.TopPostsEntity
+
 data class TopPostDomainModel(
     val id: String,
     val author_fullname: String,
     val created: Double,
-    val thumbnail: String,
-    val num_comments: Int
+    val thumbnail_link: String,
+    val comments_number: Int
 )
+
+fun TopPostDomainModel.asDatabaseModel(): TopPostsEntity {
+    return TopPostsEntity(
+        id = id,
+        author_fullname = author_fullname,
+        created = created,
+        thumbnail = thumbnail_link,
+        num_comments = comments_number
+    )
+}
+
+fun List<TopPostDomainModel>.asDataBaseList(): List<TopPostsEntity> {
+    return map {
+        it.asDatabaseModel()
+    }
+}

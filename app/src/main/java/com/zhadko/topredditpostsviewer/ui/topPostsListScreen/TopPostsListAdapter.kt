@@ -36,8 +36,8 @@ class TopPostsListAdapter(
             with(binding) {
                 authorFullName.text = data.author_fullname
                 timeOfAdding.text = data.created.toString()
-                numberComments.text = data.num_comments.toString()
-                Glide.with(context).load(data.thumbnail).into(thumbnail)
+                numberComments.text = data.comments_number.toString()
+                Glide.with(context).load(data.thumbnail_link).into(thumbnail)
                 root.setOnClickListener {
                     click(data)
                 }

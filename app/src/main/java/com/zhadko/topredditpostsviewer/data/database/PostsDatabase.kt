@@ -1,6 +1,40 @@
 package com.zhadko.topredditpostsviewer.data.database
 
-class PostsDatabase {
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+
+@Database(
+    entities = [TopPostsEntity::class],
+    version = 1,
+    exportSchema = false
+)
+abstract class PostsDatabase : RoomDatabase() {
+
+    abstract val topPostsDao: TopPostsDao
+
+    companion object {
+
+        @Volatile
+        private var INSTANCE: PostsDatabase? = null
+
+        fun getInstance(context: Context): PostsDatabase {
+            val databaseInstance = INSTANCE
+            return if (databaseInstance != null) {
+                databaseInstance
+            } else {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    PostsDatabase::class.java,
+                    "posts_database"
+                ).build()
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
+
 }
 
 

@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.database
+package com.zhadko.topredditpostsviewer.data.database.topPost
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,7 +11,8 @@ data class TopPostsEntity(
     val author_fullname: String,
     val created: Double,
     val thumbnail: String,
-    val num_comments: Int
+    val num_comments: Int,
+    val bigSizePictureUrl: String
 )
 
 fun TopPostsEntity.asDomainModel(): TopPostDomainModel {
@@ -20,7 +21,8 @@ fun TopPostsEntity.asDomainModel(): TopPostDomainModel {
         author_fullname = author_fullname,
         created = created,
         thumbnail_link = thumbnail,
-        comments_number = num_comments
+        comments_number = num_comments,
+        bigSizePictureUrl = bigSizePictureUrl
     )
 }
 

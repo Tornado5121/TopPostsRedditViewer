@@ -1,13 +1,14 @@
 package com.zhadko.topredditpostsviewer.models.domain
 
-import com.zhadko.topredditpostsviewer.data.database.TopPostsEntity
+import com.zhadko.topredditpostsviewer.data.database.topPost.TopPostsEntity
 
 data class TopPostDomainModel(
     val id: String,
     val author_fullname: String,
     val created: Double,
     val thumbnail_link: String,
-    val comments_number: Int
+    val comments_number: Int,
+    val bigSizePictureUrl: String
 )
 
 fun TopPostDomainModel.asDatabaseModel(): TopPostsEntity {
@@ -16,7 +17,8 @@ fun TopPostDomainModel.asDatabaseModel(): TopPostsEntity {
         author_fullname = author_fullname,
         created = created,
         thumbnail = thumbnail_link,
-        num_comments = comments_number
+        num_comments = comments_number,
+        bigSizePictureUrl = bigSizePictureUrl
     )
 }
 

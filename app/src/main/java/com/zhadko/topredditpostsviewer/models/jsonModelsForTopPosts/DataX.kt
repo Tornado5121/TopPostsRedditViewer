@@ -9,5 +9,6 @@ data class DataX(
     val thumbnail_width: Int,
     val num_comments: Int,
     val preview: PreviewX,
-    val id: String
+    val id: String,
+    val is_reddit_media_domain: Boolean
 )

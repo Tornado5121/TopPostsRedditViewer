@@ -15,10 +15,17 @@ class TopPostsListViewModel(
     private val mTopPostsLiveData = MutableLiveData<List<TopPostDomainModel>>()
     val topPostsLiveData = mTopPostsLiveData
 
-    fun getTopPosts() {
+    init {
         viewModelScope.launch(Dispatchers.IO) {
-            val topPosts = postsRepository.getTopPosts()
-            mTopPostsLiveData.postValue(topPosts)
+            mTopPostsLiveData.postValue(postsRepository.getTopPosts())
+        }
+    }
+
+    fun getTopPostsNewPage() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val newTopPostsPage = postsRepository.getTopPosts()
+            val currentList = mTopPostsLiveData.value ?: listOf()
+            mTopPostsLiveData.postValue(currentList + newTopPostsPage)
         }
     }
 

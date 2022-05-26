@@ -10,9 +10,12 @@ import com.bumptech.glide.Glide
 import com.zhadko.topredditpostsviewer.databinding.TopPostAdapterItemBinding
 import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
 
+const val ITEM_PAGING = 3
+
 class TopPostsListAdapter(
     private val context: Context,
-    private val onClick: (TopPostDomainModel) -> Unit,
+    private val click: (TopPostDomainModel) -> Unit,
+    private val itemHasReached: () -> Unit
 ) : ListAdapter<TopPostDomainModel,
         TopPostsListAdapter.TopPostViewHolder>(TopPostDiffUtilCallback()) {
 
@@ -21,7 +24,10 @@ class TopPostsListAdapter(
     }
 
     override fun onBindViewHolder(holder: TopPostViewHolder, position: Int) {
-        holder.bind(context, currentList[position], onClick)
+        holder.bind(context, currentList[position], click)
+        if (position == itemCount - ITEM_PAGING) {
+            itemHasReached()
+        }
     }
 
     class TopPostViewHolder(

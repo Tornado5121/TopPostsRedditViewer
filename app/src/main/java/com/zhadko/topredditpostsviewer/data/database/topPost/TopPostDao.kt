@@ -1,11 +1,11 @@
-package com.zhadko.topredditpostsviewer.data.database
+package com.zhadko.topredditpostsviewer.data.database.topPost
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface TopPostsDao {
+interface TopPostDao {
 
     @Insert
     fun addTopPosts(topPosts: List<TopPostsEntity>)

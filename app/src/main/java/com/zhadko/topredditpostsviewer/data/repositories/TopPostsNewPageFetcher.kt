@@ -2,8 +2,8 @@ package com.zhadko.topredditpostsviewer.data.repositories
 
 import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
 
-interface TopPostsFetcher {
+interface TopPostsNewPageFetcher {
 
-    suspend fun getTopPosts(): List<TopPostDomainModel>
+    suspend fun getTopPostsNewPage(postIdAfter: String): List<TopPostDomainModel>
 
 }

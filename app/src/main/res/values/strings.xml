@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TopRedditPostsViewer</string>
     <string name="post_thumbnail">post thumbnail</string>
+    <string name="bigtoppostpicture">bigTopPostPicture</string>
 </resources>

@@ -4,17 +4,39 @@ import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
 
 class TopPostsRepository(
     private val postsRepository: PostsRepository,
-    private val topPostsFetcher: TopPostsFetcher
+    private val topPostsFetcher: TopPostsFetcher,
+    private val topPostsNewPageFetcher: TopPostsNewPageFetcher,
+    private val supportTopPostsData: SupportTopPostsData
 ) : PostsRepository {
+
+    private var isCachedDataExistOrNeeded = false
 
     override suspend fun getTopPosts(): List<TopPostDomainModel> {
         return try {
-            val topPosts = topPostsFetcher.getTopPosts()
+            val idPostsAfterWhichPostsExist =
+                supportTopPostsData.postIdAfterWhichPostsExistFlow.value
+            val topPosts: List<TopPostDomainModel> = if (idPostsAfterWhichPostsExist.isEmpty()) {
+                topPostsFetcher.getTopPosts()
+            } else {
+                topPostsNewPageFetcher.getTopPostsNewPage(idPostsAfterWhichPostsExist)
+            }
+
+            if (!isCachedDataExistOrNeeded) {
+                postsRepository.clearAllTopPosts()
+                isCachedDataExistOrNeeded = true
+            }
+
             insertTopPosts(topPosts)
             topPosts
         } catch (e: Exception) {
             e.printStackTrace()
-            postsRepository.getTopPosts()
+            if (!isCachedDataExistOrNeeded) {
+                isCachedDataExistOrNeeded = true
+                postsRepository.getTopPosts()
+            } else {
+                emptyList()
+            }
+
         }
     }
 

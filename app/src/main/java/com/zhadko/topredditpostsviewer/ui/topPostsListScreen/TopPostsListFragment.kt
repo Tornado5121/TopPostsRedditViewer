@@ -18,12 +18,14 @@ class TopPostsListFragment : Fragment() {
     private val topPostsViewModel by viewModel<TopPostsListViewModel>()
 
     private val topPostsListAdapter by lazy {
-        TopPostsListAdapter(requireContext()) {
+        TopPostsListAdapter(requireContext(), {
             requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack("")
                 .replace(R.id.my_fragment_container, DetailedPostFragment.getInstance(it.id))
                 .commit()
-        }
+        }, {
+            topPostsViewModel.getTopPostsNewPage()
+        })
     }
 
     override fun onCreateView(
@@ -47,7 +49,7 @@ class TopPostsListFragment : Fragment() {
             topPostsListAdapter.submitList(it)
         }
 
-        topPostsViewModel.getTopPosts()
+        topPostsViewModel.getTopPostsNewPage()
     }
 
 }

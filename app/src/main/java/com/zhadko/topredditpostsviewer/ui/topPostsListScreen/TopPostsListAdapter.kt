@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zhadko.topredditpostsviewer.databinding.TopPostAdapterItemBinding
 import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
+import kotlin.math.roundToInt
 
-const val ITEM_PAGING = 3
+const val ITEM_PAGING = 1
 
 class TopPostsListAdapter(
     private val context: Context,
@@ -24,7 +25,9 @@ class TopPostsListAdapter(
     }
 
     override fun onBindViewHolder(holder: TopPostViewHolder, position: Int) {
-        holder.bind(context, currentList[position], click)
+        if (currentList[position].thumbnail_link.contains("https://", true)) {
+            holder.bind(context, currentList[position], click)
+        }
         if (position == itemCount - ITEM_PAGING) {
             itemHasReached()
         }
@@ -39,10 +42,19 @@ class TopPostsListAdapter(
             data: TopPostDomainModel,
             click: (TopPostDomainModel) -> Unit
         ) {
+            val authorFullNameData = data.author_fullname
+            val hoursOfCreatedAgo =
+                ((((System.currentTimeMillis() / 1000) - data.created) / (60 * 60)).roundToInt())
+            val numberOfComments = data.comments_number.toString()
+
+            val authorFullNameTextStringRes = "Posted by $authorFullNameData"
+            val hoursOfCreateAgoStringRes = " $hoursOfCreatedAgo hours ago"
+            val numberOfCommentsStringRes = "$numberOfComments comments"
+
             with(binding) {
-                authorFullName.text = data.author_fullname
-                timeOfAdding.text = data.created.toString()
-                numberComments.text = data.comments_number.toString()
+                authorFullName.text = authorFullNameTextStringRes
+                timeOfAdding.text = hoursOfCreateAgoStringRes
+                numberComments.text = numberOfCommentsStringRes
                 Glide.with(context).load(data.thumbnail_link).into(thumbnail)
                 root.setOnClickListener {
                     click(data)
@@ -54,7 +66,7 @@ class TopPostsListAdapter(
 
             fun from(parent: ViewGroup): TopPostViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = TopPostAdapterItemBinding.inflate(layoutInflater)
+                val binding = TopPostAdapterItemBinding.inflate(layoutInflater, parent, false)
                 return TopPostViewHolder(binding)
             }
 

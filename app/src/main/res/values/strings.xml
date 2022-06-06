@@ -2,4 +2,6 @@
     <string name="app_name">TopRedditPostsViewer</string>
     <string name="post_thumbnail">post thumbnail</string>
     <string name="bigtoppostpicture">bigTopPostPicture</string>
+    <string name="login">Login</string>
+    <string name="save_to_gallery">Save to gallery</string>
 </resources>

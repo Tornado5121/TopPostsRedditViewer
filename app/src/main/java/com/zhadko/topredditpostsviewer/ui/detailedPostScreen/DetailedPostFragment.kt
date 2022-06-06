@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.zhadko.topredditpostsviewer.databinding.DetailedPostFragmentBinding
@@ -33,7 +34,21 @@ class DetailedPostFragment : Fragment() {
             Glide.with(requireContext()).load(it.bigSizePictureUrl)
                 .into(binding.bigSizeTopPostPicture)
         }
+
+        detailedPostViewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
+            if (it.equals("Error"))
+                Toast.makeText(
+                    requireContext(),
+                    "Something goes wrong, try again later, please",
+                    Toast.LENGTH_LONG
+                ).show()
+        }
         detailedPostViewModel.getTopPostById()
+
+        binding.saveToGalleryButton.setOnClickListener {
+            detailedPostViewModel.saveImageToGallery()
+        }
+
     }
 
     companion object {

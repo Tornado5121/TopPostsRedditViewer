@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zhadko.topredditpostsviewer.R
@@ -19,11 +21,20 @@ class TopPostsListFragment : Fragment() {
 
     private val topPostsListAdapter by lazy {
         TopPostsListAdapter(requireContext(), {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .addToBackStack("")
-                .replace(R.id.my_fragment_container, DetailedPostFragment.getInstance(it.id))
-                .commit()
+            if (it.bigSizePictureUrl.contains("https://", true)) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .addToBackStack("")
+                    .replace(R.id.my_fragment_container, DetailedPostFragment.getInstance(it.id))
+                    .commit()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Sorry, there is no opportunity to review this post",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }, {
+            binding.progressBar.isVisible = true
             topPostsViewModel.getTopPostsNewPage()
         })
     }
@@ -47,6 +58,7 @@ class TopPostsListFragment : Fragment() {
 
         topPostsViewModel.topPostsLiveData.observe(viewLifecycleOwner) {
             topPostsListAdapter.submitList(it)
+            binding.progressBar.isVisible = false
         }
 
         topPostsViewModel.getTopPostsNewPage()

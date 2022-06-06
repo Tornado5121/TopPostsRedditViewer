@@ -1,15 +1,29 @@
 package com.zhadko.topredditpostsviewer.data.network
 
+import com.zhadko.topredditpostsviewer.models.TokenResponse
 import com.zhadko.topredditpostsviewer.models.jsonModelsForTopPosts.TopRedditPosts
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface Requests {
 
     @GET("top.json")
-    suspend fun getTopPostsNewPage(@Query("after") postIdAfter: String): TopRedditPosts
+    suspend fun getTopPostsNewPage(
+        @Header("X-Modhash") XModhash: String?,
+        @Query("after") postIdAfter: String
+    ): TopRedditPosts
 
     @GET("top.json")
-    suspend fun getTopPosts(): TopRedditPosts
+    suspend fun getTopPosts(
+        @Header("X-Modhash") XModhash: String?
+    ): TopRedditPosts
+
+    @POST("api/v1/access_token")
+    @FormUrlEncoded
+    fun getToken(
+        @Header("Authorization") Authorization: String?,
+        @Field("grant_type") grant_type: String?,
+        @Field("code") code: String?,
+        @Field("redirect_uri") redirect_uri: String?
+    ): TokenResponse
 
 }

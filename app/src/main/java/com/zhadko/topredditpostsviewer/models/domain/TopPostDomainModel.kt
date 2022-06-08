@@ -1,6 +1,6 @@
 package com.zhadko.topredditpostsviewer.models.domain
 
-import com.zhadko.topredditpostsviewer.data.database.topPost.TopPostsEntity
+import com.zhadko.topredditpostsviewer.data.database.TopPostsEntity
 
 data class TopPostDomainModel(
     val id: String,

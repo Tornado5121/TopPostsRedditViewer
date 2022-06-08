@@ -1,11 +1,12 @@
 package com.zhadko.topredditpostsviewer.data.repositories.loadingRepository
 
-import kotlinx.coroutines.flow.MutableStateFlow
+import android.widget.ImageView
+import kotlinx.coroutines.flow.StateFlow
 
 interface LoadingRepository {
 
-    val errorMessageFlow: MutableStateFlow<String>
+    val errorMessageFlow: StateFlow<String>
 
-    fun saveImageToGallery(urlAddress: String)
+    fun saveImageToGallery(imageView: ImageView)
 
 }

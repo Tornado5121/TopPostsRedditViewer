@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.database.topPost
+package com.zhadko.topredditpostsviewer.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

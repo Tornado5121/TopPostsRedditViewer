@@ -9,6 +9,8 @@ import com.zhadko.topredditpostsviewer.data.repositories.authRepository.AuthRepo
 import com.zhadko.topredditpostsviewer.data.repositories.authRepository.AuthRepositoryImpl
 import com.zhadko.topredditpostsviewer.data.repositories.loadingRepository.LoadingRepository
 import com.zhadko.topredditpostsviewer.data.repositories.loadingRepository.LoadingRepositoryImpl
+import com.zhadko.topredditpostsviewer.data.repositories.permissionRepository.PermissionRepository
+import com.zhadko.topredditpostsviewer.data.repositories.permissionRepository.PermissionRepositoryImpl
 import com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository.*
 import com.zhadko.topredditpostsviewer.ui.authScreen.AuthViewModel
 import com.zhadko.topredditpostsviewer.ui.detailedPostScreen.DetailedPostViewModel
@@ -49,10 +51,19 @@ val dataModule = module {
             get(topPostsDataBaseRepositoryQualifier), get(), get(), get()
         )
     }
+
+    single<PermissionRepository> { PermissionRepositoryImpl(androidContext()) }
+
 }
 
 val viewModelModule = module {
     viewModel { AuthViewModel(get()) }
     viewModel { TopPostsListViewModel(get(topPostsRepositoryQualifier)) }
-    viewModel { (id: String) -> DetailedPostViewModel(id, get(topPostsRepositoryQualifier), get()) }
+    viewModel { (id: String) ->
+        DetailedPostViewModel(
+            id,
+            get(topPostsRepositoryQualifier),
+            get(), get()
+        )
+    }
 }

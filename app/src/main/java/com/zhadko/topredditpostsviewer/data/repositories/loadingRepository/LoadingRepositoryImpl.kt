@@ -1,32 +1,37 @@
 package com.zhadko.topredditpostsviewer.data.repositories.loadingRepository
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Environment
+import android.widget.ImageView
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
-import java.net.URL
 
 class LoadingRepositoryImpl : LoadingRepository {
 
     private val mErrorMessageFlow = MutableStateFlow("")
-    override val errorMessageFlow = mErrorMessageFlow
+    override val errorMessageFlow: StateFlow<String> = mErrorMessageFlow
 
-    override fun saveImageToGallery(urlAddress: String) {
+    override fun saveImageToGallery(imageView: ImageView) {
         try {
-            val imageUrl = URL(urlAddress)
-            val input = imageUrl.openStream()
+            val bitmapDrawable = imageView.drawable as BitmapDrawable
+            val bitmap = bitmapDrawable.bitmap
 
-            input.use {
-                val storagePath = Environment.getExternalStorageDirectory()
-                val output: OutputStream = FileOutputStream("$storagePath/myImage.png")
-                output.use {
-                    val buffer = ByteArray(55000)
-                    var bytesRead: Int
-                    while (input.read(buffer, 0, buffer.size).also { bytesRead = it } >= 0) {
-                        output.write(buffer, 0, bytesRead)
-                    }
-                }
-            }
+            val storagePath = Environment.getExternalStorageDirectory()
+            val dir = File(storagePath.absolutePath + "/MyPictures")
+            dir.mkdirs()
+
+            val fileName = String.format("%d.png", System.currentTimeMillis())
+            val outFile = File(dir, fileName)
+
+            val output: OutputStream = FileOutputStream(outFile)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
+
+            output.flush()
+            output.close()
         } catch (e: Exception) {
             e.printStackTrace()
             mErrorMessageFlow.value = "Error"

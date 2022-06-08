@@ -2,7 +2,7 @@ package com.zhadko.topredditpostsviewer.helpers
 
 import android.Manifest
 
-object MyAppHelper {
+object MyPermissionsHelper {
 
     const val REQUEST_CODE_PERMISSIONS = 10
 

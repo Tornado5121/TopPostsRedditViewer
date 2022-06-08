@@ -2,7 +2,7 @@ package com.zhadko.topredditpostsviewer.models.jsonModelsForTopPosts
 
 import com.google.gson.annotations.SerializedName
 
-data class TopRedditPosts(
+data class TopPostObject(
     @SerializedName("data")
-    val TopPostsData: TopPostsData
+    val topPostData: TopPostDataObject,
 )

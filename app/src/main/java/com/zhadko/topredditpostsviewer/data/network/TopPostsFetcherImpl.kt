@@ -17,20 +17,20 @@ class TopPostsFetcherImpl(
 
     override suspend fun getTopPostsPage(): List<TopPostDomainModel> {
         val topPosts = api.getTopPosts(Auth.access_token)
-        val postIdAfterWhichPostsExistFlow = topPosts.data.after
+        val postIdAfterWhichPostsExistFlow = topPosts.TopPostsData.after
         mPostIdAfterWhichPostsExistFlow
             .emit(postIdAfterWhichPostsExistFlow)
-        return topPosts.data.asTopPostDomainModel()
+        return topPosts.TopPostsData.asTopPostDomainModel()
     }
 
     override suspend fun getTopPostsNewPage(
         postIdAfter: String
     ): List<TopPostDomainModel> {
         val newPageTopPosts = api.getTopPostsNewPage(Auth.access_token, postIdAfter)
-        val postIdAfterWhichPostsExistFlow = newPageTopPosts.data.after
+        val postIdAfterWhichPostsExistFlow = newPageTopPosts.TopPostsData.after
         mPostIdAfterWhichPostsExistFlow
             .emit(postIdAfterWhichPostsExistFlow)
-        return newPageTopPosts.data.asTopPostDomainModel()
+        return newPageTopPosts.TopPostsData.asTopPostDomainModel()
     }
 
 }

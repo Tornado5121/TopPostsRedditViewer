@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zhadko.topredditpostsviewer.R
+import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.TopPostsListFragmentBinding
 import com.zhadko.topredditpostsviewer.ui.detailedPostScreen.DetailedPostFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TopPostsListFragment : Fragment() {
-
-    private lateinit var binding: TopPostsListFragmentBinding
+class TopPostsListFragment : BaseFragment<TopPostsListFragmentBinding>(TopPostsListFragmentBinding::inflate) {
 
     private val topPostsViewModel by viewModel<TopPostsListViewModel>()
 
@@ -37,15 +37,6 @@ class TopPostsListFragment : Fragment() {
             binding.progressBar.isVisible = true
             topPostsViewModel.getTopPostsNewPage()
         })
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = TopPostsListFragmentBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

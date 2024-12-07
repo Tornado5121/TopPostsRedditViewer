@@ -8,17 +8,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.DetailedPostFragmentBinding
 import com.zhadko.topredditpostsviewer.helpers.MyPermissionsHelper.REQUIRED_PERMISSIONS
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 
-class DetailedPostFragment : Fragment() {
-
-    private lateinit var binding: DetailedPostFragmentBinding
+class DetailedPostFragment : BaseFragment<DetailedPostFragmentBinding>(DetailedPostFragmentBinding::inflate) {
 
     private val detailedPostViewModel: DetailedPostViewModel by viewModel {
         parametersOf(requireArguments().getString("top_post_id").toString())
@@ -28,15 +28,6 @@ class DetailedPostFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             detailedPostViewModel.saveImageToGallery(binding.bigSizeTopPostPicture)
         }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = DetailedPostFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

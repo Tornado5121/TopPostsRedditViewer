@@ -1,31 +1,28 @@
 package com.zhadko.topredditpostsviewer.ui.topPostsListScreen
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.zhadko.topredditpostsviewer.R
 import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.TopPostsListFragmentBinding
-import com.zhadko.topredditpostsviewer.ui.detailedPostScreen.DetailedPostFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TopPostsListFragment : BaseFragment<TopPostsListFragmentBinding>(TopPostsListFragmentBinding::inflate) {
+class TopPostsListFragment :
+    BaseFragment<TopPostsListFragmentBinding>(TopPostsListFragmentBinding::inflate) {
 
     private val topPostsViewModel by viewModel<TopPostsListViewModel>()
 
     private val topPostsListAdapter by lazy {
         TopPostsListAdapter(requireContext(), {
             if (it.bigSizePictureUrl.contains("https://", true)) {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .addToBackStack("")
-                    .replace(R.id.my_fragment_container, DetailedPostFragment.getInstance(it.id))
-                    .commit()
+                findNavController().navigate(
+                    TopPostsListFragmentDirections.actionTopPostsListFragmentToDetailedPostFragment(
+                        it.id
+                    )
+                )
             } else {
                 Toast.makeText(
                     requireContext(),

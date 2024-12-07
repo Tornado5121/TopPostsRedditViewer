@@ -1,13 +1,10 @@
 package com.zhadko.topredditpostsviewer.ui.authScreen
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.zhadko.topredditpostsviewer.R
+import androidx.navigation.fragment.findNavController
 import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.AuthFragmentBinding
-import com.zhadko.topredditpostsviewer.ui.topPostsListScreen.TopPostsListFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -23,10 +20,7 @@ class AuthFragment : BaseFragment<AuthFragmentBinding>(AuthFragmentBinding::infl
 
         authViewModel.authTokenLiveData.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.my_fragment_container, TopPostsListFragment())
-                    .commit()
+                findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToTopPostsListFragment())
             }
         }
     }

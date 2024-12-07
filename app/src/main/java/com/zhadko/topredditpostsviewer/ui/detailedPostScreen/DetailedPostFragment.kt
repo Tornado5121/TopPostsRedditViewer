@@ -2,14 +2,11 @@ package com.zhadko.topredditpostsviewer.ui.detailedPostScreen
 
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.DetailedPostFragmentBinding
@@ -18,10 +15,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 
-class DetailedPostFragment : BaseFragment<DetailedPostFragmentBinding>(DetailedPostFragmentBinding::inflate) {
+class DetailedPostFragment :
+    BaseFragment<DetailedPostFragmentBinding>(DetailedPostFragmentBinding::inflate) {
+
+    private val navArgs by navArgs<DetailedPostFragmentArgs>()
 
     private val detailedPostViewModel: DetailedPostViewModel by viewModel {
-        parametersOf(requireArguments().getString("top_post_id").toString())
+        parametersOf(navArgs.postId)
     }
 
     private val permissionRequestLauncher =
@@ -55,18 +55,4 @@ class DetailedPostFragment : BaseFragment<DetailedPostFragmentBinding>(DetailedP
             }
         }
     }
-
-    companion object {
-
-        private const val TOP_POST_ID = "top_post_id"
-        fun getInstance(id: String): DetailedPostFragment {
-            return DetailedPostFragment().apply {
-                arguments = Bundle().apply {
-                    putString(TOP_POST_ID, id)
-                }
-            }
-        }
-
-    }
-
 }

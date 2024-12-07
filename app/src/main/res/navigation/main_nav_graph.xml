@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/topPostsListFragment">
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.zhadko.topredditpostsviewer.ui.authScreen.AuthFragment"
+        android:label="AuthFragment" >
+        <action
+            android:id="@+id/action_authFragment_to_topPostsListFragment"
+            app:destination="@id/topPostsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailedPostFragment"
+        android:name="com.zhadko.topredditpostsviewer.ui.detailedPostScreen.DetailedPostFragment"
+        android:label="DetailedPostFragment" >
+        <argument
+            android:name="postId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/topPostsListFragment"
+        android:name="com.zhadko.topredditpostsviewer.ui.topPostsListScreen.TopPostsListFragment"
+        android:label="TopPostsListFragment" >
+        <action
+            android:id="@+id/action_topPostsListFragment_to_detailedPostFragment"
+            app:destination="@id/detailedPostFragment" />
+    </fragment>
+</navigation>

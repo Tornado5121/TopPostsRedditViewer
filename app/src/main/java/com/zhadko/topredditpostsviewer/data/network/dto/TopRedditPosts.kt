@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.models.jsonModelsForTopPosts
+package com.zhadko.topredditpostsviewer.data.network.dto
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,6 +1,6 @@
-package com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository
+package com.zhadko.topredditpostsviewer.domain.repositories
 
-import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
 
 interface PostsRepository : TopPostsFetcher {
 

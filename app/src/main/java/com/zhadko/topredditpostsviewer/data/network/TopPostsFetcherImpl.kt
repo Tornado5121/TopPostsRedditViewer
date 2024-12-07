@@ -1,11 +1,11 @@
 package com.zhadko.topredditpostsviewer.data.network
 
 import com.zhadko.topredditpostsviewer.auth.Auth
-import com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository.SupportTopPostsData
-import com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository.TopPostsFetcher
-import com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository.TopPostsNewPageFetcher
-import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
-import com.zhadko.topredditpostsviewer.models.jsonModelsForTopPosts.asTopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.repositories.SupportTopPostsData
+import com.zhadko.topredditpostsviewer.domain.repositories.TopPostsFetcher
+import com.zhadko.topredditpostsviewer.domain.repositories.TopPostsNewPageFetcher
+import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.data.network.dto.asTopPostDomainModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class TopPostsFetcherImpl(

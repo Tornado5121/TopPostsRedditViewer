@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.repositories.authRepository
+package com.zhadko.topredditpostsviewer.domain.repositories
 
 import android.content.Intent
 import kotlinx.coroutines.flow.MutableStateFlow

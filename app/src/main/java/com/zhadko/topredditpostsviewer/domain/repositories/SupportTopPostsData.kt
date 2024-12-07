@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository
+package com.zhadko.topredditpostsviewer.domain.repositories
 
 import kotlinx.coroutines.flow.MutableStateFlow
 

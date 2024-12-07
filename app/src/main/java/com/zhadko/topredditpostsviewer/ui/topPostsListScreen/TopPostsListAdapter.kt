@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zhadko.topredditpostsviewer.databinding.TopPostAdapterItemBinding
-import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
 import kotlin.math.roundToInt
 
 const val ITEM_PAGING = 1

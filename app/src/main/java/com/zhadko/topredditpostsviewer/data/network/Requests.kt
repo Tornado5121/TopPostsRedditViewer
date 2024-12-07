@@ -1,7 +1,7 @@
 package com.zhadko.topredditpostsviewer.data.network
 
-import com.zhadko.topredditpostsviewer.models.TokenResponse
-import com.zhadko.topredditpostsviewer.models.jsonModelsForTopPosts.TopRedditPosts
+import com.zhadko.topredditpostsviewer.data.network.dto.auth.TokenResponse
+import com.zhadko.topredditpostsviewer.data.network.dto.TopRedditPosts
 import retrofit2.http.*
 
 interface Requests {

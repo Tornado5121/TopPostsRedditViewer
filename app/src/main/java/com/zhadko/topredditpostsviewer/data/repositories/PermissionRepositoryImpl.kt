@@ -1,8 +1,9 @@
-package com.zhadko.topredditpostsviewer.data.repositories.permissionRepository
+package com.zhadko.topredditpostsviewer.data.repositories
 
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
+import com.zhadko.topredditpostsviewer.domain.repositories.PermissionRepository
 import com.zhadko.topredditpostsviewer.helpers.MyPermissionsHelper
 
 class PermissionRepositoryImpl(

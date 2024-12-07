@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zhadko.topredditpostsviewer.data.repositories.loadingRepository.LoadingRepository
-import com.zhadko.topredditpostsviewer.data.repositories.permissionRepository.PermissionRepository
-import com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository.PostsRepository
-import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.repositories.LoadingRepository
+import com.zhadko.topredditpostsviewer.domain.repositories.PermissionRepository
+import com.zhadko.topredditpostsviewer.domain.repositories.PostsRepository
+import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

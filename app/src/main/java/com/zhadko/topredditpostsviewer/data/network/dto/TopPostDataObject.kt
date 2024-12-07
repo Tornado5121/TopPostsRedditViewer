@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.models.jsonModelsForTopPosts
+package com.zhadko.topredditpostsviewer.data.network.dto
 
 data class TopPostDataObject(
     val author_fullname: String,

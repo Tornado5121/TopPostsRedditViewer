@@ -1,9 +1,10 @@
-package com.zhadko.topredditpostsviewer.data.repositories.loadingRepository
+package com.zhadko.topredditpostsviewer.data.repositories
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Environment
 import android.widget.ImageView
+import com.zhadko.topredditpostsviewer.domain.repositories.LoadingRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.io.File

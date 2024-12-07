@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zhadko.topredditpostsviewer.data.repositories.authRepository.AuthRepository
+import com.zhadko.topredditpostsviewer.domain.repositories.AuthRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

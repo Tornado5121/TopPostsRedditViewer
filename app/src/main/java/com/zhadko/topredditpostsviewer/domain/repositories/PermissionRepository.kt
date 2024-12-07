@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.repositories.permissionRepository
+package com.zhadko.topredditpostsviewer.domain.repositories
 
 interface PermissionRepository {
 

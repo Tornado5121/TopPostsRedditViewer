@@ -2,7 +2,7 @@ package com.zhadko.topredditpostsviewer.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
 
 @Entity
 data class TopPostsEntity(

@@ -1,8 +1,8 @@
 package com.zhadko.topredditpostsviewer.data.database
 
-import com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository.PostsRepository
-import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
-import com.zhadko.topredditpostsviewer.models.domain.asDataBaseList
+import com.zhadko.topredditpostsviewer.domain.repositories.PostsRepository
+import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.models.asDataBaseList
 
 class PostsDatabaseRepository(
     private val topPostDao: TopPostDao

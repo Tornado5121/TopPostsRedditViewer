@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.repositories.loadingRepository
+package com.zhadko.topredditpostsviewer.domain.repositories
 
 import android.widget.ImageView
 import kotlinx.coroutines.flow.StateFlow

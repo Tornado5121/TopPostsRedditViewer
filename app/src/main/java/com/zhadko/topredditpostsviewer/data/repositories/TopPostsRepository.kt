@@ -1,6 +1,10 @@
-package com.zhadko.topredditpostsviewer.data.repositories.topPostsRepository
+package com.zhadko.topredditpostsviewer.data.repositories
 
-import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.repositories.PostsRepository
+import com.zhadko.topredditpostsviewer.domain.repositories.SupportTopPostsData
+import com.zhadko.topredditpostsviewer.domain.repositories.TopPostsFetcher
+import com.zhadko.topredditpostsviewer.domain.repositories.TopPostsNewPageFetcher
 
 class TopPostsRepository(
     private val postsRepository: PostsRepository,

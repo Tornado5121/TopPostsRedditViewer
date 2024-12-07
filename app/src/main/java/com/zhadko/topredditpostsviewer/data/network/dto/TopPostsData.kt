@@ -1,7 +1,7 @@
-package com.zhadko.topredditpostsviewer.models.jsonModelsForTopPosts
+package com.zhadko.topredditpostsviewer.data.network.dto
 
 
-import com.zhadko.topredditpostsviewer.models.domain.TopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
 
 data class TopPostsData(
     val after: String,

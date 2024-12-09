@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.database
+package com.zhadko.topredditpostsviewer.data.dataSource.database
 
 import android.content.Context
 import androidx.room.Database

@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.database
+package com.zhadko.topredditpostsviewer.data.dataSource.database
 
 import com.zhadko.topredditpostsviewer.domain.repositories.PostsRepository
 import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel

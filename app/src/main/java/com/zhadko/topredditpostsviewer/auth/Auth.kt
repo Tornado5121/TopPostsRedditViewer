@@ -4,22 +4,17 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.net.wifi.rtt.CivicLocationKeys.STATE
-import android.util.Base64
 import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
-import com.zhadko.topredditpostsviewer.auth.MyAuthRes.CLIENT_ID
-import com.zhadko.topredditpostsviewer.data.network.Requests
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.zhadko.topredditpostsviewer.data.dataSource.dataStore.UserDataStore
+import com.zhadko.topredditpostsviewer.data.dataSource.network.Requests
 import okhttp3.Credentials
 
 class Auth(
     private val context: Context,
     private val api: Requests,
+    private val userDataStore: UserDataStore,
 ) {
-
-    private val mAuthTokenFlow = MutableStateFlow("")
-    val authTokenFlow = mAuthTokenFlow
 
     private val url: String = java.lang.String.format(
         MyAuthRes.AUTH_URL,
@@ -52,17 +47,13 @@ class Auth(
 
     private suspend fun getAccessToken(code: String) {
         val accessToken = api.getToken(
-            Credentials.basic(CLIENT_ID, ""),
+            Credentials.basic(
+                MyAuthRes.CLIENT_ID, ""
+            ),
             "authorization_code",
             code,
             MyAuthRes.REDIRECT_URI
         ).access_token
-        access_token = accessToken
-        mAuthTokenFlow.value = access_token
+        userDataStore.saveAccessToken(accessToken)
     }
-
-    companion object {
-        var access_token = ""
-    }
-
 }

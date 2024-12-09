@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.network.dto
+package com.zhadko.topredditpostsviewer.data.dataSource.network.dto
 
 
 import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel

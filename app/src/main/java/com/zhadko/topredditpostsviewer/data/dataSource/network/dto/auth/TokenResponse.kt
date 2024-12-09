@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.data.network.dto.auth
+package com.zhadko.topredditpostsviewer.data.dataSource.network.dto.auth
 
 data class TokenResponse(
     var access_token: String,

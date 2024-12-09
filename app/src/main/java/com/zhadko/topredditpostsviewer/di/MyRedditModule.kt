@@ -1,6 +1,5 @@
 package com.zhadko.topredditpostsviewer.di
 
-import com.zhadko.topredditpostsviewer.auth.Auth
 import com.zhadko.topredditpostsviewer.data.dataSource.dataStore.UserDataStore
 import com.zhadko.topredditpostsviewer.data.dataSource.dataStore.UserDataStoreImpl
 import com.zhadko.topredditpostsviewer.data.dataSource.database.PostsDatabase
@@ -38,7 +37,7 @@ const val BASE_URL = "https://www.reddit.com/"
 
 val dataModule = module {
 
-    single<AuthRepository> { AuthRepositoryImpl(Auth(androidContext(), get(), get()), get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(), get(), androidContext()) }
 
     single<UserDataStore> { UserDataStoreImpl(androidContext()) }
 

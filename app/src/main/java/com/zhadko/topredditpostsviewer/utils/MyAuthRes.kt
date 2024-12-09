@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.auth
+package com.zhadko.topredditpostsviewer.utils
 
 object MyAuthRes {
 

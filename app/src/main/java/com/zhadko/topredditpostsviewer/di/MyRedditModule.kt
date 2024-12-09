@@ -21,6 +21,7 @@ import com.zhadko.topredditpostsviewer.domain.repositories.TopPostsNewPageFetche
 import com.zhadko.topredditpostsviewer.ui.authScreen.AuthViewModel
 import com.zhadko.topredditpostsviewer.ui.detailedPostScreen.DetailedPostViewModel
 import com.zhadko.topredditpostsviewer.ui.topPostsListScreen.TopPostsListViewModel
+import com.zhadko.topredditpostsviewer.utils.MyAuthRes.BASE_URL
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,8 +33,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val topPostsDataBaseRepositoryQualifier = StringQualifier("topPostsDataBaseRepoQualifier")
 val topPostsRepositoryQualifier = StringQualifier("topPostsRepositoryQualifier")
-
-const val BASE_URL = "https://www.reddit.com/"
 
 val networkModule = module {
 

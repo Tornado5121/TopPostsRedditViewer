@@ -12,4 +12,5 @@ object MyAuthRes {
 
     const val STATE = "MY_RANDOM_STRING_1"
 
+    const val BASE_URL = "https://www.reddit.com/"
 }

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.DetailedPostFragmentBinding
-import com.zhadko.topredditpostsviewer.helpers.MyPermissionsHelper.REQUIRED_PERMISSIONS
+import com.zhadko.topredditpostsviewer.utils.MyPermissionsHelper.REQUIRED_PERMISSIONS
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

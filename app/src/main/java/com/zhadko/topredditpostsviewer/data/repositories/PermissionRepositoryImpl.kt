@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import com.zhadko.topredditpostsviewer.domain.repositories.PermissionRepository
-import com.zhadko.topredditpostsviewer.helpers.MyPermissionsHelper
+import com.zhadko.topredditpostsviewer.utils.MyPermissionsHelper
 
 class PermissionRepositoryImpl(
     private val context: Context

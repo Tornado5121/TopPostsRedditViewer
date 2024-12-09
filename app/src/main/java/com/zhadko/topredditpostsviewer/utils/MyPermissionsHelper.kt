@@ -1,4 +1,4 @@
-package com.zhadko.topredditpostsviewer.helpers
+package com.zhadko.topredditpostsviewer.utils
 
 import android.Manifest
 

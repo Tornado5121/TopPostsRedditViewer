@@ -1,25 +1,26 @@
 package com.zhadko.topredditpostsviewer.ui.authScreen
 
 import android.content.Intent
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zhadko.topredditpostsviewer.base.BaseViewModel
 import com.zhadko.topredditpostsviewer.domain.repositories.AuthRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val authRepository: AuthRepository
-) : ViewModel() {
-
-    private val mAuthTokenLiveData = MutableLiveData<String>()
-    val authTokenLiveData = mAuthTokenLiveData
+    private val authRepository: AuthRepository,
+) : BaseViewModel<AuthState>(
+    AuthState(
+        isLoading = true,
+        isLogged = false
+    )
+) {
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            authRepository.authFlow.collectLatest {
-                mAuthTokenLiveData.postValue(it)
+            authRepository.authFlow.collectLatest { authData ->
+                updateState(state.value.copy(isLoading = false, isLogged = authData.isNotBlank()))
             }
         }
     }

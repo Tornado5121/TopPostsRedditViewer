@@ -2,9 +2,11 @@ package com.zhadko.topredditpostsviewer.ui.authScreen
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.AuthFragmentBinding
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -18,9 +20,11 @@ class AuthFragment : BaseFragment<AuthFragmentBinding>(AuthFragmentBinding::infl
             authViewModel.login()
         }
 
-        authViewModel.authTokenLiveData.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToTopPostsListFragment())
+        lifecycleScope.launch {
+            authViewModel.state.collect {
+                if (it.isLogged) {
+                    findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToTopPostsListFragment())
+                }
             }
         }
     }

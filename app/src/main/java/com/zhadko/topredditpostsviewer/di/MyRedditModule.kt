@@ -35,13 +35,7 @@ val topPostsRepositoryQualifier = StringQualifier("topPostsRepositoryQualifier")
 
 const val BASE_URL = "https://www.reddit.com/"
 
-val dataModule = module {
-
-    single<AuthRepository> { AuthRepositoryImpl(get(), get(), androidContext()) }
-
-    single<UserDataStore> { UserDataStoreImpl(androidContext()) }
-
-    single<LoadingRepository> { LoadingRepositoryImpl() }
+val networkModule = module {
 
     single {
         Retrofit.Builder()
@@ -64,6 +58,19 @@ val dataModule = module {
             SupportTopPostsData::class
         )
     )
+}
+
+val authModule = module {
+
+    single<AuthRepository> { AuthRepositoryImpl(get(), get(), androidContext()) }
+}
+
+val dataModule = module {
+
+    single<UserDataStore> { UserDataStoreImpl(androidContext()) }
+
+    single<LoadingRepository> { LoadingRepositoryImpl() }
+
     single<PostsRepository>(topPostsDataBaseRepositoryQualifier) {
         PostsDatabaseRepository(
             PostsDatabase.getInstance(androidContext()).topPostDao

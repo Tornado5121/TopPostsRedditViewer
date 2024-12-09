@@ -22,7 +22,7 @@ fun TopPostsEntity.asDomainModel(): TopPostDomainModel {
         created = created,
         thumbnail_link = thumbnail,
         comments_number = num_comments,
-        bigSizePictureUrl = bigSizePictureUrl
+        bigSizePictureUrl = bigSizePictureUrl.replace("&amp;", "&")
     )
 }
 

@@ -1,6 +1,6 @@
 package com.zhadko.topredditpostsviewer.data.dataSource.network
 
-import com.zhadko.topredditpostsviewer.data.dataSource.network.dto.asTopPostDomainModel
+import com.zhadko.topredditpostsviewer.domain.mappers.asTopPostDomainModel
 import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
 import com.zhadko.topredditpostsviewer.domain.repositories.SupportTopPostsData
 import com.zhadko.topredditpostsviewer.domain.repositories.TopPostsFetcher

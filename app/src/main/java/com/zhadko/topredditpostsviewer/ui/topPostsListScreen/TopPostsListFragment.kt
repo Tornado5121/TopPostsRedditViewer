@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.TopPostsListFragmentBinding
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TopPostsListFragment :
@@ -44,12 +46,11 @@ class TopPostsListFragment :
             topPostsList.layoutManager = LinearLayoutManager(requireContext())
         }
 
-        topPostsViewModel.topPostsLiveData.observe(viewLifecycleOwner) {
-            topPostsListAdapter.submitList(it)
-            binding.progressBar.isVisible = false
+        lifecycleScope.launch {
+            topPostsViewModel.state.collect {
+                topPostsListAdapter.submitList(it.topPostsList)
+                binding.progressBar.isVisible = it.isLoading
+            }
         }
-
-        topPostsViewModel.getTopPostsNewPage()
     }
-
 }

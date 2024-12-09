@@ -17,9 +17,9 @@ interface Requests {
         @Header("X-Modhash") XModhash: String?
     ): TopRedditPosts
 
-    @POST("api/v1/access_token")
     @FormUrlEncoded
-    fun getToken(
+    @POST("api/v1/access_token")
+    suspend fun getToken(
         @Header("Authorization") Authorization: String?,
         @Field("grant_type") grant_type: String?,
         @Field("code") code: String?,

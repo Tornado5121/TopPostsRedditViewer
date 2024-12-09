@@ -31,7 +31,9 @@ class AuthViewModel(
     }
 
     fun getAuthData(intent: Intent) {
-        authRepository.getData(intent)
+        viewModelScope.launch {
+            authRepository.getData(intent)
+        }
     }
 
 }

@@ -8,12 +8,14 @@ import android.net.wifi.rtt.CivicLocationKeys.STATE
 import android.util.Base64
 import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
+import com.zhadko.topredditpostsviewer.auth.MyAuthRes.CLIENT_ID
 import com.zhadko.topredditpostsviewer.data.network.Requests
 import kotlinx.coroutines.flow.MutableStateFlow
+import okhttp3.Credentials
 
 class Auth(
     private val context: Context,
-    private val api: Requests
+    private val api: Requests,
 ) {
 
     private val mAuthTokenFlow = MutableStateFlow("")
@@ -32,29 +34,25 @@ class Auth(
         startActivity(context, intent, null)
     }
 
-    fun getData(intent: Intent) {
+    suspend fun getData(intent: Intent) {
         if (intent.action == Intent.ACTION_VIEW) {
-            val uri = intent.data
-            if (uri!!.getQueryParameter("error") != null) {
+            val uri = Uri.parse(intent.data.toString())
+            val code = uri.getQueryParameter("code")
+            if (code == null) {
                 val error = uri.getQueryParameter("error")
                 Log.e(TAG, "An error has occurred : $error")
             } else {
                 val state = uri.getQueryParameter("state")
-                if (state == STATE.toString()) {
-                    val code = uri.getQueryParameter("code")
-                    if (code != null) {
-                        getAccessToken(code)
-                    }
+                if (state == "MY_RANDOM_STRING_1") {
+                    getAccessToken(code)
                 }
             }
         }
     }
 
-    private fun getAccessToken(code: String) {
-        val authString = "$MyAuthRes.CLIENT_ID:${MyAuthRes.STATE}"
-        val encodedAuthString = Base64.encodeToString(authString.toByteArray(), Base64.NO_WRAP)
+    private suspend fun getAccessToken(code: String) {
         val accessToken = api.getToken(
-            "Basic $encodedAuthString",
+            Credentials.basic(CLIENT_ID, ""),
             "authorization_code",
             code,
             MyAuthRes.REDIRECT_URI

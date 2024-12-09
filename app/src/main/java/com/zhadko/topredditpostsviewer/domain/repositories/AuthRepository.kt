@@ -8,6 +8,6 @@ interface AuthRepository {
     val authFlow: MutableStateFlow<String>
 
     fun login()
-    fun getData(intent: Intent)
+    suspend fun getData(intent: Intent)
 
 }

@@ -1,14 +1,12 @@
 package com.zhadko.topredditpostsviewer.ui.detailedPostScreen
 
 import android.widget.ImageView
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zhadko.topredditpostsviewer.base.BaseViewModel
 import com.zhadko.topredditpostsviewer.domain.repositories.LoadingRepository
 import com.zhadko.topredditpostsviewer.domain.repositories.PermissionRepository
 import com.zhadko.topredditpostsviewer.domain.repositories.PostsRepository
-import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -17,11 +15,13 @@ class DetailedPostViewModel(
     private val id: String,
     private val postsRepository: PostsRepository,
     private val loadingRepository: LoadingRepository,
-    private val permissionRepository: PermissionRepository
-) : ViewModel() {
-
-    private val mTopPostLiveData = MutableLiveData<TopPostDomainModel>()
-    val topPostLiveData: LiveData<TopPostDomainModel> = mTopPostLiveData
+    private val permissionRepository: PermissionRepository,
+) : BaseViewModel<DetailedPostState>(
+    DetailedPostState(
+        isLoading = true,
+        postModel = null
+    )
+) {
 
     private val mErrorMessageLiveData = MutableLiveData<String>()
     val errorMessageLiveData = mErrorMessageLiveData
@@ -37,7 +37,7 @@ class DetailedPostViewModel(
     fun getTopPostById() {
         viewModelScope.launch(Dispatchers.IO) {
             val myTopPost = postsRepository.getTopPostById(id)
-            mTopPostLiveData.postValue(myTopPost)
+            updateState(state.value.copy(isLoading = false, postModel = myTopPost))
         }
     }
 

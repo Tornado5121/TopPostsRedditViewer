@@ -16,9 +16,9 @@ fun TopPostsData.asTopPostDomainModel(): List<TopPostDomainModel> {
             id = it.topPostData.id,
             author_fullname = it.topPostData.author_fullname,
             created = it.topPostData.created,
-            thumbnail_link = it.topPostData.thumbnail,
+            thumbnail_link = it.topPostData.thumbnail.replace("&amp;", "&"),
             comments_number = it.topPostData.num_comments,
-            bigSizePictureUrl = bigSizePictureUrl
+            bigSizePictureUrl = bigSizePictureUrl.replace("&amp;", "&")
         )
     }
 }

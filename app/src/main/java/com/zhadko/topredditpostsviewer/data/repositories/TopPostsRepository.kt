@@ -40,7 +40,6 @@ class TopPostsRepository(
             } else {
                 emptyList()
             }
-
         }
     }
 

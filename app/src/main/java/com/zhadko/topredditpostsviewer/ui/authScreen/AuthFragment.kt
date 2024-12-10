@@ -9,7 +9,6 @@ import com.zhadko.topredditpostsviewer.databinding.AuthFragmentBinding
 import com.zhadko.topredditpostsviewer.utils.extensions.collectAsState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class AuthFragment : BaseFragment<AuthFragmentBinding>(AuthFragmentBinding::inflate) {
 
     private val authViewModel by viewModel<AuthViewModel>()

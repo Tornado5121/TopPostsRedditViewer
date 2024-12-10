@@ -1,7 +1,7 @@
 package com.zhadko.topredditpostsviewer.data.dataSource.database
 
+import com.zhadko.topredditpostsviewer.domain.mappers.asDataBaseList
 import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
-import com.zhadko.topredditpostsviewer.domain.models.asDataBaseList
 import com.zhadko.topredditpostsviewer.domain.repositories.PostsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -1,5 +1,6 @@
 package com.zhadko.topredditpostsviewer.domain.mappers
 
+import com.zhadko.topredditpostsviewer.data.dataSource.database.TopPostsEntity
 import com.zhadko.topredditpostsviewer.data.dataSource.network.dto.TopPostsData
 import com.zhadko.topredditpostsviewer.domain.models.TopPostDomainModel
 
@@ -19,6 +20,23 @@ fun TopPostsData.asTopPostDomainModel(): List<TopPostDomainModel> {
             comments_number = it.topPostData.num_comments,
             bigSizePictureUrl = bigSizePictureUrl
         )
+    }
+}
+
+fun TopPostDomainModel.asDatabaseModel(): TopPostsEntity {
+    return TopPostsEntity(
+        id = id,
+        author_fullname = author_fullname,
+        created = created,
+        thumbnail = thumbnail_link,
+        num_comments = comments_number,
+        bigSizePictureUrl = bigSizePictureUrl
+    )
+}
+
+fun List<TopPostDomainModel>.asDataBaseList(): List<TopPostsEntity> {
+    return map {
+        it.asDatabaseModel()
     }
 }
 

@@ -2,6 +2,7 @@ package com.zhadko.topredditpostsviewer.ui.authScreen
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.AuthFragmentBinding
@@ -36,6 +37,8 @@ class AuthFragment : BaseFragment<AuthFragmentBinding>(AuthFragmentBinding::infl
 
     private fun handleState(state: AuthState) {
         if (state.isLogged) navigateToDetailedScreen()
+        binding.progressBar.isVisible = state.isLoading
+        binding.login.isEnabled = !state.isLoading
     }
 
     private fun navigateToDetailedScreen() {

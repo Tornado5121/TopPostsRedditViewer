@@ -36,5 +36,4 @@ class AuthViewModel(
             authRepository.getData(intent)
         }
     }
-
 }

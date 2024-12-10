@@ -2,11 +2,10 @@ package com.zhadko.topredditpostsviewer.ui.authScreen
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.zhadko.topredditpostsviewer.base.BaseFragment
 import com.zhadko.topredditpostsviewer.databinding.AuthFragmentBinding
-import kotlinx.coroutines.launch
+import com.zhadko.topredditpostsviewer.utils.extensions.collectAsState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -16,21 +15,30 @@ class AuthFragment : BaseFragment<AuthFragmentBinding>(AuthFragmentBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.login.setOnClickListener {
-            authViewModel.login()
-        }
-
-        lifecycleScope.launch {
-            authViewModel.state.collect {
-                if (it.isLogged) {
-                    findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToTopPostsListFragment())
-                }
-            }
-        }
+        setupView()
+        setupCollectors()
     }
 
     override fun onResume() {
         super.onResume()
         authViewModel.getAuthData(requireActivity().intent)
+    }
+
+    private fun setupView() {
+        binding.login.setOnClickListener {
+            authViewModel.login()
+        }
+    }
+
+    private fun setupCollectors() {
+        collectAsState(authViewModel.state, ::handleState)
+    }
+
+    private fun handleState(state: AuthState) {
+        if (state.isLogged) navigateToDetailedScreen()
+    }
+
+    private fun navigateToDetailedScreen() {
+        findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToTopPostsListFragment())
     }
 }

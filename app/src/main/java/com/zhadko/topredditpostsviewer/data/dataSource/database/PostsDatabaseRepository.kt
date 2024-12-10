@@ -19,7 +19,7 @@ class PostsDatabaseRepository(
     }
 
     override suspend fun getTopPostById(id: String): TopPostDomainModel {
-        return topPostDao.getTopPostById(id).asDomainModel()
+        return withContext(Dispatchers.IO) { topPostDao.getTopPostById(id).asDomainModel() }
     }
 
     override suspend fun clearAllTopPosts() {
